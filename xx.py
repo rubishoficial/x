@@ -1,4 +1,4 @@
-```python
+
 #!/usr/bin/env python3
 # CODE START BY RUBISH
 
@@ -1345,4 +1345,3 @@ def DARKS(number,amo):
 if __name__ == "__main__":
     os.system("clear")
     BCS()
-```
